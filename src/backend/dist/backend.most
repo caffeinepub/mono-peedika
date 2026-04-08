@@ -1,0 +1,79 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type OrderId__197865225 = Text;
+type OrderId__320512251 = OrderId__197865225;
+type OrderItem__419350014 =
+  {
+    priceAtOrder : Nat;
+    productId : ProductId__603204223;
+    productName : Text;
+    qty : Nat
+  };
+type OrderStatus__340549605 = {#Delivered; #Paid; #Pending; #Shipped};
+type Order__516101800 =
+  {
+    createdAt : Timestamp__718767551;
+    customerEmail : Text;
+    customerId : Text;
+    customerName : Text;
+    customerPhone : Text;
+    id : OrderId__320512251;
+    items : [OrderItem__419350014];
+    paymentMethod : PaymentMethod__302993719;
+    shippingAddress : ShippingAddress__187559322;
+    status : OrderStatus__340549605;
+    totalAmount : Nat;
+    upiTransactionId : ?Text
+  };
+type PaymentMethod__302993719 = {#COD; #UPI};
+type ProductId__160010635 = Text;
+type ProductId__603204223 = ProductId__160010635;
+type Product__129602263 =
+  {
+    category : Text;
+    createdAt : Timestamp__718767551;
+    description : Text;
+    discountPercent : Nat;
+    id : ProductId__603204223;
+    imageUrl : Text;
+    name : Text;
+    price : Nat;
+    rating : Float;
+    reviewCount : Nat;
+    stockQty : Nat;
+    tags : [Text];
+    updatedAt : Timestamp__718767551
+  };
+type ShippingAddress__187559322 =
+  {
+    addressLine1 : Text;
+    addressLine2 : ?Text;
+    city : Text;
+    postalCode : Text;
+    state : Text
+  };
+type Timestamp__301639476 = Int;
+type Timestamp__718767551 = Timestamp__301639476;
+actor {
+  stable var orderIdCounter : Nat;
+  stable orders :
+    {
+      var root : Node__46230540<OrderId__320512251, Order__516101800>;
+      var size : Nat__490723111
+    };
+  stable var productIdCounter : Nat;
+  stable products :
+    {
+      var root : Node__46230540<ProductId__603204223, Product__129602263>;
+      var size : Nat__490723111
+    };
+  stable seedCount : Nat
+};

@@ -1,0 +1,28 @@
+{
+  "overview": "Mono-peedika is a high-performance dark-themed e-commerce store with a mobile-first storefront, product grid with star ratings and INR prices, admin dashboard for product management and image uploads, checkout flow with UPI and Cash on Delivery, and order management with WhatsApp confirmation.",
+  "features": [
+    "Dark-themed storefront with sticky header, search, and product grid",
+    "Best Sellers and Deals of the Day homepage sections",
+    "Product detail pages with image carousel",
+    "Shopping cart with persistent state",
+    "Admin dashboard protected by Internet Identity login",
+    "Product image upload via object storage",
+    "Checkout with UPI (UTR input) and Cash on Delivery",
+    "Order saving to canister with all customer and payment details",
+    "Thank You page with WhatsApp contact button",
+    "Fully responsive mobile-first design"
+  ],
+  "category": "e-commerce",
+  "tags": [
+    "e-commerce",
+    "dark-theme",
+    "mobile-first",
+    "admin-dashboard",
+    "upi-payments",
+    "cod",
+    "whatsapp",
+    "product-management",
+    "order-management"
+  ],
+  "last_updated": "2026-04-08T15:18:17.856Z"
+}

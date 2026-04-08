@@ -1,0 +1,113 @@
+type UpdateProductRequest = 
+ record {
+   category: text;
+   description: text;
+   discountPercent: nat;
+   id: ProductId;
+   imageUrl: text;
+   name: text;
+   price: nat;
+   rating: float64;
+   reviewCount: nat;
+   stockQty: nat;
+   tags: vec text;
+ };
+type Timestamp = int;
+type ShippingAddress = 
+ record {
+   addressLine1: text;
+   addressLine2: opt text;
+   city: text;
+   postalCode: text;
+   state: text;
+ };
+type ProductId = text;
+type Product = 
+ record {
+   category: text;
+   createdAt: Timestamp;
+   description: text;
+   discountPercent: nat;
+   id: ProductId;
+   imageUrl: text;
+   name: text;
+   price: nat;
+   rating: float64;
+   reviewCount: nat;
+   stockQty: nat;
+   tags: vec text;
+   updatedAt: Timestamp;
+ };
+type PaymentMethod = 
+ variant {
+   COD;
+   UPI;
+ };
+type OrderStatus = 
+ variant {
+   Delivered;
+   Paid;
+   Pending;
+   Shipped;
+ };
+type OrderItem = 
+ record {
+   priceAtOrder: nat;
+   productId: ProductId;
+   productName: text;
+   qty: nat;
+ };
+type OrderId = text;
+type Order = 
+ record {
+   createdAt: Timestamp;
+   customerEmail: text;
+   customerId: text;
+   customerName: text;
+   customerPhone: text;
+   id: OrderId;
+   items: vec OrderItem;
+   paymentMethod: PaymentMethod;
+   shippingAddress: ShippingAddress;
+   status: OrderStatus;
+   totalAmount: nat;
+   upiTransactionId: opt text;
+ };
+type CreateOrderRequest = 
+ record {
+   customerEmail: text;
+   customerId: text;
+   customerName: text;
+   customerPhone: text;
+   items: vec OrderItem;
+   paymentMethod: PaymentMethod;
+   shippingAddress: ShippingAddress;
+   upiTransactionId: opt text;
+ };
+type AddProductRequest = 
+ record {
+   category: text;
+   description: text;
+   discountPercent: nat;
+   imageUrl: text;
+   name: text;
+   price: nat;
+   rating: float64;
+   reviewCount: nat;
+   stockQty: nat;
+   tags: vec text;
+ };
+service : {
+  addProduct: (req: AddProductRequest) -> (Product);
+  createOrder: (req: CreateOrderRequest) -> (Order);
+  deleteProduct: (id: ProductId) -> (bool);
+  getFeaturedProducts: (tag: text) -> (vec Product) query;
+  getOrder: (id: OrderId) -> (opt Order) query;
+  getOrdersByCustomer: (customerId: text) -> (vec Order) query;
+  getProduct: (id: ProductId) -> (opt Product) query;
+  listOrders: () -> (vec Order) query;
+  listProducts: () -> (vec Product) query;
+  searchProducts: (searchTerm: text) -> (vec Product) query;
+  updateOrderStatus: (id: OrderId, status: OrderStatus) -> (opt Order);
+  updateProduct: (req: UpdateProductRequest) -> (opt Product);
+}
